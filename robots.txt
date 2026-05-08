@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://turbofront930-alt.github.io/facebookcom/sitemap.xml

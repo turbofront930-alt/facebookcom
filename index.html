@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turbo Front | المهندس إبراهيم سعد عبد المولى</title>
+    
+    <meta property="og:title" content="Turbo Front | Eng Ebrahim Saad">
+    <meta property="og:description" content="تصميم مواقع ومتاجر إلكترونية وكروت أفراح بـ استضافة مجانية مدى الحياة بإشراف المهندس إبراهيم سعد.">
+    <meta property="og:image" content="https://turbofront930-alt.github.io/facebookcom/assets/og-image.jpg">
+    <meta property="og:url" content="https://turbofront930-alt.github.io/facebookcom/">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        body { font-family: 'Cairo', sans-serif; padding-bottom: 80px; }
+        .marquee-container { overflow: hidden; white-space: nowrap; }
+        .marquee-text { display: inline-block; animation: marquee 20s linear infinite; }
+        @keyframes marquee { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+        
+        /* تصميم الزر العائم للاتصال */
+        .floating-call {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background-color: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: transform 0.3s;
+        }
+        .floating-call:hover { transform: scale(1.1); }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+
+    <a href="tel:01101475409" class="floating-call" title="اتصل بالمهندس إبراهيم">
+        <i class="fas fa-phone"></i>
+    </a>
+
+    <div class="bg-blue-700 py-2 text-center text-sm font-bold border-b border-blue-500 shadow-lg">
+        🔥 استضافة مجانية مدى الحياة لجميع المواقع والمتاجر والكروت 🔥
+    </div>
+
+    <header class="p-8 bg-gray-800 shadow-2xl text-center border-b border-blue-500/30">
+        <h1 class="text-4xl font-extrabold text-blue-400 tracking-wider">TURBO FRONT</h1>
+        <p class="text-gray-400 mt-2 text-lg font-bold">مهندس / إبراهيم سعد عبد المولى</p>
+        
+        <div class="flex justify-center gap-4 mt-6 overflow-x-auto pb-2 px-4">
+            <button onclick="filterProducts('all')" class="bg-blue-600 px-6 py-2 rounded-full text-sm font-bold shadow-lg shadow-blue-900/40">الكل</button>
+            <button onclick="filterProducts('web')" class="bg-gray-700 hover:bg-blue-500 px-5 py-2 rounded-full text-sm transition min-w-[max-content]">تصميم مواقع</button>
+            <button onclick="filterProducts('e-store')" class="bg-gray-700 hover:bg-blue-500 px-5 py-2 rounded-full text-sm transition min-w-[max-content]">متاجر إلكترونية</button>
+            <button onclick="filterProducts('invitation')" class="bg-gray-700 hover:bg-blue-500 px-5 py-2 rounded-full text-sm transition min-w-[max-content]">كروت أفراح</button>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-8 mb-10">
+        <div id="products-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            </div>
+    </main>
+
+    <div class="fixed bottom-0 left-0 w-full bg-blue-900 border-t border-blue-400 py-3 z-50">
+        <div class="marquee-container relative">
+            <div class="marquee-text font-bold text-sm md:text-base text-blue-100">
+                Developed by: المهندس إبراهيم سعد عبد المولى | للتواصل: 01101475409 | 
+                <a href="https://www.facebook.com/Eng.Bego2000" target="_blank" class="underline hover:text-white mx-2">الفيسبوك الشخصي</a> | 
+                <a href="https://www.facebook.com/share/1BJg9uvL74/" target="_blank" class="underline hover:text-white mx-2">صفحة العمل</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                Developed by: المهندس إبراهيم سعد عبد المولى | رقم المصمم: 01101475409
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
