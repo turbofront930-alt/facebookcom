@@ -5,7 +5,7 @@
     "price": "900",
     "oldPrice": "1500",
     "category": "web",
-    "image": "assets/images/web-design.png",
+    "image": "assets/images/web-design.jpg",
     "description": "تصميم موقع احترافي متكامل بـ استضافة مجانية للأبد. الدفع مرة واحدة فقط."
   },
   {
@@ -14,8 +14,8 @@
     "price": "1800",
     "oldPrice": "2800",
     "category": "e-store",
-    "image": "assets/images/e-store.png",
-    "description": "ابدأ تجارتك الآن بمتجر سريع يربطك بالعملاء عبر الواتساب مباشرة   استضافة مجانية."
+    "image": "assets/images/e-store.jpg",
+    "description": "ابدأ تجارتك الآن بمتجر سريع يربطك بالعملاء عبر الواتساب مباشرة وبدون استضافة."
   },
   {
     "id": 3,
@@ -23,16 +23,16 @@
     "price": "250",
     "oldPrice": "500",
     "category": "invitation",
-    "image": "assets/images/wedding-card.png",
+    "image": "assets/images/wedding-card.jpg",
     "description": "دعوة زفاف رقمية تفاعلية تشمل موقع القاعة، عداد تنازلي وموسيقى. وفر تكاليف الورق."
   },
   {
     "id": 4,
-    "name": "عرض الحزمة البرمجية",
-    "price": "2500",
-    "oldPrice": "4000",
+    "name": "باقة VIP المتكاملة",
+    "price": "2700",
+    "oldPrice": "4500",
     "category": "web",
-    "image": "assets/images/bundle-offer.png",
-    "description": "احصل على موقعك ومتجرك الخاص في عرض واحد مع استضافة مجانية تماماً."
+    "image": "assets/images/bundle-offer.jpg",
+    "description": "العرض الأقوى: موقع تعريفي + متجر إلكتروني + كارت فرح رقمي هدية. كل ما تحتاجه في باقة واحدة."
   }
 ]
