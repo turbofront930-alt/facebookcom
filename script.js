@@ -1,61 +1,61 @@
-let allProducts = [];
-
-async function fetchProducts() {
+// دالة لجلب المنتجات وعرضها
+async function loadProducts() {
     try {
         const response = await fetch('products.json');
-        allProducts = await response.json();
-        displayProducts(allProducts);
+        const products = await response.json();
+        displayProducts(products);
     } catch (error) {
-        console.error("Error loading products:", error);
+        console.error('خطأ في تحميل المنتجات:', error);
     }
 }
 
 function displayProducts(products) {
     const container = document.getElementById('products-container');
-    container.innerHTML = ""; 
+    container.innerHTML = ''; // مسح المحتوى القديم
 
     products.forEach(product => {
-        // تنسيق عرض السعر والخصم
-        const priceHTML = product.oldPrice 
-            ? `<div>
-                <span class="text-gray-500 line-through text-xs block">${product.oldPrice} ج.م</span>
-                <span class="text-xl font-bold text-green-400">${product.price} ج.م</span>
-               </div>`
-            : `<span class="text-xl font-bold text-blue-400">${product.price} ج.م</span>`;
-
-        const card = `
-            <div class="bg-gray-800 border border-gray-700 rounded-2xl overflow-hidden shadow-lg transform hover:-translate-y-2 transition duration-300">
-                <img src="${product.image}" class="w-full h-52 object-cover bg-gray-700 shadow-inner">
-                <div class="p-6">
-                    <h2 class="text-xl font-bold mb-2">${product.name}</h2>
-                    <p class="text-gray-400 text-sm h-12 overflow-hidden mb-4">${product.description}</p>
-                    <div class="flex justify-between items-center border-t border-gray-700 pt-4">
-                        ${priceHTML}
-                        <button onclick="sendOrder('${product.name}')" 
-                                class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl font-bold text-sm transition shadow-lg shadow-blue-900/20">
-                            اطلب الآن
+        const productCard = `
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden border border-gray-100 dark:border-gray-700 transition-transform hover:scale-[1.02]">
+                <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover" 
+                     onerror="this.src='https://via.placeholder.com/400x300?text=Image+Not+Found'">
+                <div class="p-4 text-right">
+                    <span class="text-[10px] bg-blue-100 text-blue-600 px-2 py-1 rounded-full font-bold">${product.category}</span>
+                    <h3 class="text-lg font-bold mt-2 dark:text-white">${product.name}</h3>
+                    <p class="text-xs text-gray-500 mt-1 dark:text-gray-400 line-clamp-2">${product.description}</p>
+                    <div class="flex justify-between items-center mt-4 border-t pt-4">
+                        <div>
+                            <span class="text-blue-600 font-bold text-xl">${product.price} ج.م</span>
+                            <span class="text-gray-400 line-through text-[10px] mr-2">${product.oldPrice} ج.م</span>
+                        </div>
+                        <button onclick="orderViaWhatsApp('${product.name}')" class="bg-green-600 text-white px-4 py-2 rounded-lg text-xs font-bold hover:bg-green-700 transition">
+                             اطلب الآن
                         </button>
                     </div>
                 </div>
             </div>
         `;
-        container.innerHTML += card;
+        container.insertAdjacentHTML('beforeend', productCard);
     });
 }
 
-function filterProducts(category) {
+// دالة الفلترة (عشان تشتغل مع الأزرار اللي في الـ HTML)
+async function filterProducts(category) {
+    const response = await fetch('products.json');
+    const products = await response.json();
+    
     if (category === 'all') {
-        displayProducts(allProducts);
+        displayProducts(products);
     } else {
-        const filtered = allProducts.filter(p => p.category === category);
+        const filtered = products.filter(p => p.category === category);
         displayProducts(filtered);
     }
 }
 
-function sendOrder(name) {
-    const myNumber = "201101475409"; 
-    const text = `أهلاً بشمهندس إبراهيم سعد، أريد الاستفسار عن خدمة: ${name}`;
-    window.open(`https://wa.me/${myNumber}?text=${encodeURIComponent(text)}`, '_blank');
+// دالة الطلب عبر الواتساب
+function orderViaWhatsApp(productName) {
+    const message = `أهلاً بشمهندس إبراهيم، محتاج استفسر عن خدمة: ${productName}`;
+    window.open(`https://wa.me/201101475409?text=${encodeURIComponent(message)}`, '_blank');
 }
 
-fetchProducts();
+// تحميل المنتجات عند فتح الصفحة
+document.addEventListener('DOMContentLoaded', loadProducts);
