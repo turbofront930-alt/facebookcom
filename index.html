@@ -1,57 +1,198 @@
-<section id="order-form" class="container mx-auto py-12 px-6 bg-white dark:bg-gray-900 rounded-3xl shadow-2xl my-10 border-2 border-blue-600">
-    <h2 class="text-3xl font-bold mb-6 text-center text-blue-600">خصص طلبك الآن</h2>
-    <form id="customOrderForm" class="max-w-2xl mx-auto space-y-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input type="text" id="custName" placeholder="اسمك بالكامل" class="p-3 border rounded-lg dark:bg-gray-800" required>
-            <input type="tel" id="custPhone" placeholder="رقم الموبايل" class="p-3 border rounded-lg dark:bg-gray-800" required>
-        </div>
-        <input type="text" id="custAddress" placeholder="العنوان (المحافظة/المدينة)" class="p-3 border rounded-lg w-full dark:bg-gray-800" required>
-        <select id="projectType" class="p-3 border rounded-lg w-full dark:bg-gray-800">
-            <option value="موقع تعريفي">موقع تعريفي</option>
-            <option value="متجر واتساب">متجر واتساب</option>
-            <option value="كارت فرح">كارت فرح</option>
-            <option value="باقة VIP">باقة VIP المتكاملة</option>
-        </select>
-        <textarea id="projectDetails" placeholder="تفاصيل إضافية عن مشروعك (اختياري)" class="p-3 border rounded-lg w-full h-32 dark:bg-gray-800"></textarea>
-        <button type="button" onclick="sendToWhatsApp()" class="w-full bg-green-600 text-white font-bold py-4 rounded-xl hover:bg-green-700 transition">
-            <i class="fab fa-whatsapp ml-2"></i> إرسال الطلب للمهندس إبراهيم
-        </button>
-    </form>
-</section>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Turbo Front | المهندس إبراهيم سعد - تصميم مواقع ومتاجر</title>
+    <meta name="description" content="موقع المهندس إبراهيم سعد لتصميم المواقع والمتاجر الإلكترونية وكروت الأفراح الرقمية. احصل على باقة VIP المتكاملة واستضافة مجانية مدى الحياة.">
+    <meta name="keywords" content="إبراهيم سعد عبد المولى, تصميم مواقع, متجر واتساب, كارت فرح رقمي, استضافة مجانية, Turbo Front, برمجة مواقع مصر, خدمات ويب 2026">
+    <meta name="author" content="Engineer Ibrahim Saad">
 
-<section class="container mx-auto py-10 px-6">
-    <h2 class="text-2xl font-bold mb-8 border-r-4 border-blue-600 pr-3">المدونة التقنية</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <article class="p-5 bg-gray-50 dark:bg-gray-800 rounded-xl">
-            <h3 class="font-bold text-blue-600 mb-2">لماذا متجر الواتساب؟</h3>
-            <p class="text-sm opacity-80">لأنه أسرع وسيلة للبيع المباشر دون الحاجة لتعقيدات الدفع الإلكتروني المعتادة في مصر.</p>
-        </article>
-        <article class="p-5 bg-gray-50 dark:bg-gray-800 rounded-xl">
-            <h3 class="font-bold text-blue-600 mb-2">أهمية الاستضافة المجانية</h3>
-            <p class="text-sm opacity-80">توفير رسوم التجديد السنوية (2000ج+) يجعلك تركز فقط على تطوير محتوى موقعك.</p>
-        </article>
-        <article class="p-5 bg-gray-50 dark:bg-gray-800 rounded-xl">
-            <h3 class="font-bold text-blue-600 mb-2">التحول الرقمي 2026</h3>
-            <p class="text-sm opacity-80">امتلاكك لموقع هو بمثابة امتلاكك لمقر عمل مفتوح 24 ساعة للجمهور.</p>
-        </article>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { colors: { darkPrimary: '#1a202c', darkSecondary: '#2d3748' } } }
+        }
+    </script>
+    <style>
+        body { font-family: 'Cairo', sans-serif; transition: background 0.3s, color 0.3s; scroll-behavior: smooth; }
+        .marquee-text { display: inline-block; animation: marquee 20s linear infinite; }
+        @keyframes marquee { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-white">
+
+    <button onclick="toggleDarkMode()" class="fixed top-24 left-5 z-[1001] bg-gray-800 dark:bg-yellow-400 text-white dark:text-black p-3 rounded-full shadow-lg">
+        <i id="theme-icon" class="fas fa-moon"></i>
+    </button>
+
+    <div class="bg-red-600 text-white text-center py-2 font-bold text-sm sticky top-0 z-[1000]">
+        ينتهي عرض الخصم الحصري خلال: <span id="countdown">00:00:00</span>
     </div>
-</section>
 
-<script>
-function sendToWhatsApp() {
-    const name = document.getElementById('custName').value;
-    const phone = document.getElementById('custPhone').value;
-    const address = document.getElementById('custAddress').value;
-    const type = document.getElementById('projectType').value;
-    const details = document.getElementById('projectDetails').value;
-    
-    const message = `طلب مشروع جديد من المهندس إبراهيم:%0A` +
-                    `- الاسم: ${name}%0A` +
-                    `- الهاتف: ${phone}%0A` +
-                    `- العنوان: ${address}%0A` +
-                    `- النوع: ${type}%0A` +
-                    `- التفاصيل: ${details}`;
-    
-    window.open(`https://wa.me/201101475409?text=${message}`, '_blank');
-}
-</script>
+    <header class="p-8 bg-white dark:bg-gray-800 shadow-xl text-center border-b-4 border-blue-600">
+        <h1 class="text-4xl font-extrabold text-blue-600 dark:text-blue-400 tracking-widest">TURBO FRONT</h1>
+        <p class="mt-2 text-lg font-bold">مهندس / إبراهيم سعد عبد المولى</p>
+        <p class="text-sm opacity-70">IT Engineer & Web Developer</p>
+        
+        <div class="flex justify-center gap-4 mt-6 overflow-x-auto pb-2">
+            <button onclick="filterProducts('all')" class="bg-blue-600 text-white px-6 py-2 rounded-full font-bold shadow-md">الكل</button>
+            <button onclick="filterProducts('web')" class="bg-gray-200 dark:bg-gray-700 px-5 py-2 rounded-full hover:bg-blue-100 transition">مواقع</button>
+            <button onclick="filterProducts('e-store')" class="bg-gray-200 dark:bg-gray-700 px-5 py-2 rounded-full hover:bg-blue-100 transition">متاجر</button>
+            <button onclick="filterProducts('invitation')" class="bg-gray-200 dark:bg-gray-700 px-5 py-2 rounded-full hover:bg-blue-100 transition">كروت فرح</button>
+        </div>
+    </header>
+
+    <section class="container mx-auto py-10 px-6 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+        <div class="p-6 bg-blue-50 dark:bg-gray-800 rounded-xl shadow-sm border border-blue-100 dark:border-gray-700">
+            <i class="fas fa-rocket text-4xl text-blue-600 mb-4"></i>
+            <h3 class="font-bold text-xl mb-2">سرعة فائقة</h3>
+            <p class="text-sm opacity-80">تسليم مشاريعك خلال 48 ساعة فقط بأحدث التقنيات البرمجية.</p>
+        </div>
+        <div class="p-6 bg-blue-50 dark:bg-gray-800 rounded-xl shadow-md border-t-4 border-blue-600">
+            <i class="fas fa-infinity text-4xl text-blue-600 mb-4"></i>
+            <h3 class="font-bold text-xl mb-2">استضافة مجانية</h3>
+            <p class="text-sm opacity-80">بصفتي مهندس IT، أوفر لك استضافة عالمية مجانية مدى الحياة دون أي مصاريف تجديد.</p>
+        </div>
+        <div class="p-6 bg-blue-50 dark:bg-gray-800 rounded-xl shadow-sm border border-blue-100 dark:border-gray-700">
+            <i class="fas fa-headset text-4xl text-blue-600 mb-4"></i>
+            <h3 class="font-bold text-xl mb-2">دعم فني هندسي</h3>
+            <p class="text-sm opacity-80">تواصل مباشر مع المهندس إبراهيم لضمان عمل موقعك بكفاءة 100%.</p>
+        </div>
+    </section>
+
+    <main class="container mx-auto p-6">
+        <h2 class="text-2xl font-bold mb-8 border-r-4 border-blue-600 pr-3">باقات الخدمات والأسعار</h2>
+        <div id="products-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            </div>
+    </main>
+
+    <section id="order-form" class="container mx-auto py-12 px-6 bg-white dark:bg-gray-800 rounded-3xl shadow-2xl my-10 border-2 border-blue-600">
+        <h2 class="text-3xl font-bold mb-6 text-center text-blue-600">خصص طلبك الآن</h2>
+        <p class="text-center mb-8 opacity-70">املاً البيانات وسيقوم المهندس إبراهيم بالتواصل معك فوراً</p>
+        <form id="customOrderForm" class="max-w-2xl mx-auto space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="text" id="custName" placeholder="اسمك بالكامل" class="p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600" required>
+                <input type="tel" id="custPhone" placeholder="رقم الموبايل (واتساب)" class="p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600" required>
+            </div>
+            <input type="text" id="custAddress" placeholder="العنوان (المحافظة/المدينة)" class="p-3 border rounded-lg w-full dark:bg-gray-700 dark:border-gray-600" required>
+            <select id="projectType" class="p-3 border rounded-lg w-full dark:bg-gray-700 dark:border-gray-600">
+                <option value="موقع تعريفي">موقع تعريفي Landing Page</option>
+                <option value="متجر واتساب">متجر إلكتروني للواتساب</option>
+                <option value="كارت فرح">كارت فرح إلكتروني</option>
+                <option value="باقة VIP">باقة VIP المتكاملة (موقع + متجر)</option>
+            </select>
+            <textarea id="projectDetails" placeholder="تفاصيل إضافية عن مشروعك..." class="p-3 border rounded-lg w-full h-32 dark:bg-gray-700 dark:border-gray-600"></textarea>
+            <button type="button" onclick="sendToWhatsApp()" class="w-full bg-green-600 text-white font-bold py-4 rounded-xl hover:bg-green-700 transition shadow-lg flex items-center justify-center gap-2">
+                <i class="fab fa-whatsapp text-xl"></i> إرسال الطلب عبر واتساب
+            </button>
+        </form>
+    </section>
+
+    <section class="container mx-auto py-10 px-6 bg-gray-100 dark:bg-gray-800 rounded-3xl my-10">
+        <h2 class="text-2xl font-bold mb-8 text-center">نماذج من أعمالي السابقة</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="relative group overflow-hidden rounded-xl shadow-lg border-2 border-transparent hover:border-blue-600 transition">
+                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=500" alt="Habbat Bun" class="w-full h-64 object-cover">
+                <div class="absolute inset-0 bg-black/70 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <h4 class="text-xl font-bold text-white">متجر حبات بن للقهوة</h4>
+                    <p class="text-blue-300">نظام متكامل لطلب القهوة عبر الواتساب</p>
+                    <span class="mt-4 px-4 py-1 bg-blue-600 text-white rounded-full text-xs">مشروع حي</span>
+                </div>
+            </div>
+            <div class="relative group overflow-hidden rounded-xl shadow-lg border-2 border-transparent hover:border-blue-600 transition text-center flex items-center justify-center bg-white dark:bg-gray-700">
+                <div class="p-10">
+                    <i class="fas fa-plus-circle text-4xl text-blue-600 mb-2"></i>
+                    <p class="font-bold">مشروعك القادم هنا</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container mx-auto py-10 px-6">
+        <h2 class="text-2xl font-bold mb-8 border-r-4 border-blue-600 pr-3">المدونة التقنية</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <article class="p-5 bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition">
+                <h3 class="font-bold text-blue-600 mb-2 underline">لماذا متجر الواتساب؟</h3>
+                <p class="text-sm opacity-80 leading-relaxed">لأنه أسرع وسيلة للبيع المباشر في مصر، يقلل خطوات الشراء ويزيد من ثقة العميل عبر التواصل الشخصي.</p>
+            </article>
+            <article class="p-5 bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition">
+                <h3 class="font-bold text-blue-600 mb-2 underline">قوة الاستضافة المجانية</h3>
+                <p class="text-sm opacity-80 leading-relaxed">توفير تكاليف السيرفرات السنوية يسمح لأصحاب المشاريع الصغيرة بالنمو دون أعباء مالية إضافية ثابتة.</p>
+            </article>
+            <article class="p-5 bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition">
+                <h3 class="font-bold text-blue-600 mb-2 underline">التواجد الرقمي 2026</h3>
+                <p class="text-sm opacity-80 leading-relaxed">الموقع الإلكتروني ليس رفاهية، بل هو هويتك الرسمية أمام عملائك ومحركات البحث مثل جوجل.</p>
+            </article>
+        </div>
+    </section>
+
+    <footer class="fixed bottom-0 left-0 w-full bg-blue-600 text-white py-3 z-50 overflow-hidden shadow-[0_-5px_15px_rgba(0,0,0,0.2)]">
+        <div class="marquee-text font-bold">
+            Developed by: المهندس إبراهيم سعد عبد المولى | للتواصل: 01101475409 | تصميم مخصص | متاجر واتساب | كروت أفراح رقمية | استضافة مجانية مدى الحياة لجميع عملائنا الكرام
+        </div>
+    </footer>
+
+    <script>
+        // تفعيل الوضع الليلي
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            const icon = document.getElementById('theme-icon');
+            if(document.documentElement.classList.contains('dark')) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // حفظ تفضيلات المستخدم للوضع الليلي
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+            document.getElementById('theme-icon').classList.replace('fa-moon', 'fa-sun');
+        }
+
+        // العداد التنازلي متجدد (24 ساعة)
+        let time = 86400; 
+        function updateTimer() {
+            let h = Math.floor(time / 3600);
+            let m = Math.floor((time % 3600) / 60);
+            let s = time % 60;
+            document.getElementById('countdown').innerHTML = 
+                (h < 10 ? '0'+h : h) + ":" + (m < 10 ? '0'+m : m) + ":" + (s < 10 ? '0'+s : s);
+            if (time > 0) time--;
+        }
+        setInterval(updateTimer, 1000);
+
+        // وظيفة إرسال الواتساب المنظمة
+        function sendToWhatsApp() {
+            const name = document.getElementById('custName').value;
+            const phone = document.getElementById('custPhone').value;
+            const address = document.getElementById('custAddress').value;
+            const type = document.getElementById('projectType').value;
+            const details = document.getElementById('projectDetails').value;
+            
+            if(!name || !phone || !address) {
+                alert("برجاء ملء البيانات الأساسية");
+                return;
+            }
+
+            const message = `*طلب مشروع جديد - Turbo Front*%0A%0A` +
+                            `*الاسم:* ${name}%0A` +
+                            `*الهاتف:* ${phone}%0A` +
+                            `*العنوان:* ${address}%0A` +
+                            `*نوع المشروع:* ${type}%0A` +
+                            `*تفاصيل:* ${details || 'لا يوجد'}`;
+            
+            window.open(`https://wa.me/201101475409?text=${message}`, '_blank');
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
